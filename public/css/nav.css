@@ -1,0 +1,34 @@
+.navbar .nav-item {
+    background-color: #227dc7;
+    border-left: lightgrey solid 1px;
+    border-right: lightgrey solid 1px;
+}
+
+.navbar-nav .active {
+    background-color: #1d68a7;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 1);
+}
+
+.navbar .nav-item:hover {
+    background-color: #1b4b72;
+}
+
+@media only screen and (max-width: 992px) {
+    .navbar .nav-item {
+        border-bottom: lightgrey solid 3px;
+        border-left: lightgrey solid 0;
+        border-right: lightgrey solid 1px;
+        background-color: #3490dc;
+    }
+}
+
+footer {
+    background-color: royalblue;
+}
+
+footer p {
+    margin: 0;
+}

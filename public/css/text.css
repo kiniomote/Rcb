@@ -1,0 +1,35 @@
+.paragraph-marker-h3 {
+    background-color: #3f9ae5;
+    height: 34px;
+    width: 16px;
+    margin-left: 15px;
+    margin-right: 5px;
+}
+
+.paragraph-h3 {
+    border-bottom: #3f9ae5 solid 4px;
+}
+
+.text-splitter {
+    width: 100%;
+    border-top: #3f9ae5 solid 4px;
+}
+
+.header-border-left {
+    background-color: #3f9ae5;
+    height: 34px;
+    width: 26%;
+    margin-left: 15px;
+}
+
+.header-border-right {
+    background-color: #3f9ae5;
+    height: 34px;
+    width: 26%;
+    margin-right: 15px;
+}
+
+.img-lesson-title {
+    float: left;
+    height: 300px;
+}
