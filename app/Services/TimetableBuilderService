@@ -1,0 +1,57 @@
+<?php
+
+namespace App\Services;
+
+use App\Club;
+use Illuminate\Support\Facades\DB;
+
+class TimetableBuilderService
+{
+    private $query_times = "SELECT time_start, time_end FROM exercise WHERE club_id = :club AND day_id = :day";
+    private $query_take_monday_id = "SELECT id FROM days WHERE name = 'Понедельник'";
+
+    public function __construct()
+    {
+
+    }
+
+    public function build()
+    {
+        $clubs_exercises = $this->takeClubs();
+        $timetable = $this->takeTimes($clubs_exercises);
+        return $timetable;
+    }
+
+    private function takeClubs()
+    {
+        $clubs_exercises = [];
+        $clubs = Club::has('exercises')->get();
+        foreach ($clubs as $club) {
+            $clubs_exercises[] = [
+                'id' => $club->id,
+                'club' => $club->name,
+                'leader' => $club->lead->surname . ' ' . $club->lead->name[0] . '. ' . $club->lead->patronymic[0] . '.',
+                'monday' => [],
+                'tuesday' => [],
+                'wednesday' => [],
+                'thursday' => [],
+                'friday' => [],
+                'saturday' => [],
+                'sunday' => [],
+            ];
+        }
+        return $clubs_exercises;
+    }
+
+    private function takeTimes($clubs_exercises)
+    {
+        $timetable = $clubs_exercises;
+        foreach ($clubs_exercises as $clubs_exercise) {
+            $club_id = $clubs_exercise['id'];
+            $monday_id = DB::select($this->query_take_monday_id);
+            $times = DB::select($this->query_times, ['club' => $club_id, 'day' => $monday_id]);
+            $clubs_exercise['monday'][] = $times[0] . ' - ' . $times[1];
+        }
+        return $timetable;
+    }
+}
